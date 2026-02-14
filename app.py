@@ -22,13 +22,30 @@ html, body {
     font-family: 'Georgia', serif;
 }
 
+/* Big flower decoration */
+.flower {
+    position: fixed;
+    bottom: -30px;
+    right: -20px;
+    font-size: 180px;
+    opacity: 0.15;
+    z-index: 0;
+    animation: floatFlower 6s ease-in-out infinite;
+}
+
+@keyframes floatFlower {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
 /* Falling hearts */
 .heart {
     position: fixed;
     top: -10px;
     font-size: 20px;
     animation: fall linear infinite;
-    z-index: 0;
+    z-index: 1;
 }
 
 @keyframes fall {
@@ -41,8 +58,8 @@ html, body {
     font-weight: bold;
     margin-top: 80px;
     animation: fadeInTitle 2s ease;
-    z-index: 2;
     position: relative;
+    z-index: 2;
 }
 
 @keyframes fadeInTitle {
@@ -59,6 +76,7 @@ div.stButton > button {
     padding: 10px 35px;
     border: none;
     transition: 0.4s;
+    z-index: 3;
 }
 
 div.stButton > button:hover {
@@ -67,7 +85,7 @@ div.stButton > button:hover {
     transform: scale(1.08);
 }
 
-/* Letter container */
+/* Letter */
 .letter {
     position: fixed;
     left: 50%;
@@ -87,13 +105,11 @@ div.stButton > button:hover {
     z-index: 5;
 }
 
-/* When active */
 .letter.show {
     opacity: 1;
     transform: translate(-50%, 0px) scale(1);
 }
 
-/* Inner text fade */
 .letter-content {
     animation: fadeContent 2s ease forwards;
     opacity: 0;
@@ -104,14 +120,18 @@ div.stButton > button:hover {
     to {opacity: 1;}
 }
 
-/* Mobile tweaks */
+/* Mobile */
 @media (max-width: 400px) {
     .title { font-size: 32px; }
+    .flower { font-size: 130px; }
     .letter { font-size: 14px; padding: 20px; }
 }
 
 </style>
 """, unsafe_allow_html=True)
+
+# Big Flower
+st.markdown('<div class="flower">🌹</div>', unsafe_allow_html=True)
 
 # Falling hearts
 for i in range(20):
@@ -130,6 +150,7 @@ for i in range(20):
         unsafe_allow_html=True
     )
 
+# Title
 st.markdown('<div class="title">💖 HAPPY VALENTINE MOWY 💖</div>', unsafe_allow_html=True)
 
 st.write("")
@@ -143,13 +164,12 @@ if st.session_state.open_letter:
     <div class="letter show">
         <div class="letter-content">
             <h2>💌 For My Love 💌</h2>
-            Happy Valentine cantik 💕<br><br>
             maaf kalo ini simple banget,<br>
-            tapi intinya aku sayang banget sama kamu, maaf ya
-            kalo aku masih ngga bisa nepatin janji aku, aku
-            selalu kangen sama kamu, tingkah imut kamu, suara kamu
-            aku bener bener selalu kangen semua hal tentang kamu, aku
-            pengen banget ngasih kamu bunga tapi aku bener bener binggung
+            tapi intinya aku sayang banget sama kamu, maaf ya<br>
+            kalo aku masih ngga bisa nepatin janji aku, aku<br>
+            selalu kangen sama kamu, tingkah imut kamu, suara kamu<br>
+            aku bener bener selalu kangen semua hal tentang kamu, aku<br>
+            pengen banget ngasih kamu bunga tapi aku bener bener binggung<br>
             next time aku bakal usahain bunga itu bener bener sampe di kamu..<br><br>
             <b>i love u Chelsea Morenofa 💖</b>
         </div>
