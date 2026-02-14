@@ -40,14 +40,13 @@ html, body {
     font-size: 42px;
     font-weight: bold;
     margin-top: 80px;
-    animation: fadeIn 2s ease-in-out;
-    position: relative;
+    animation: fadeInTitle 2s ease;
     z-index: 2;
-    padding: 0 15px;
+    position: relative;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
+@keyframes fadeInTitle {
+    from {opacity: 0; transform: translateY(30px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
@@ -65,46 +64,50 @@ div.stButton > button {
 div.stButton > button:hover {
     background-color: #ff1493;
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-/* Letter */
+/* Letter container */
 .letter {
     position: fixed;
-    bottom: -100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 40px) scale(0.95);
     width: 85%;
-    max-width: 400px;
+    max-width: 420px;
     background: #fff0f5;
     color: #c71585;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 28px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     text-align: center;
     font-size: 16px;
-    transition: bottom 1.5s ease-in-out;
+    opacity: 0;
+    bottom: 10%;
+    transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 5;
 }
 
+/* When active */
 .letter.show {
-    bottom: 15%;
+    opacity: 1;
+    transform: translate(-50%, 0px) scale(1);
 }
 
-.letter h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
+/* Inner text fade */
+.letter-content {
+    animation: fadeContent 2s ease forwards;
+    opacity: 0;
 }
 
-/* Responsive for very small phones */
+@keyframes fadeContent {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Mobile tweaks */
 @media (max-width: 400px) {
-    .title {
-        font-size: 32px;
-    }
-    .letter {
-        font-size: 14px;
-        padding: 20px;
-    }
+    .title { font-size: 32px; }
+    .letter { font-size: 14px; padding: 20px; }
 }
 
 </style>
@@ -130,7 +133,6 @@ for i in range(20):
 st.markdown('<div class="title">💖 HAPPY VALENTINE MOWY 💖</div>', unsafe_allow_html=True)
 
 st.write("")
-st.write("")
 
 if not st.session_state.open_letter:
     if st.button("NEXT 💌"):
@@ -139,14 +141,12 @@ if not st.session_state.open_letter:
 if st.session_state.open_letter:
     st.markdown("""
     <div class="letter show">
-        <h2>💌 For My Love 💌</h2>
-        Happy Valentine cantik 💕<br><br>
-        maaf kalo ini simple banget,<br>
-        tapi intinya aku sayang banget sama kamu,
-        maaf kalo aku masih ngga bisa nepatin janji aku
-        karena emang kamu selalu ngangenin, tingkah kamu,
-        suara kamu, bener bener imut banget pls, aku pengen
-        banget ngasih kamu bunga jujur, hufftt intinya<br><br>
-        <b>i love u Chelsea Morenofa 💖</b>
+        <div class="letter-content">
+            <h2>💌 For My Love 💌</h2>
+            Happy Valentine cantik 💕<br><br>
+            maaf kalo ini simple banget,<br>
+            tapi intinya aku sayang banget sama kamu,<br><br>
+            <b>i love u Chelsea Morenofa 💖</b>
+        </div>
     </div>
     """, unsafe_allow_html=True)
