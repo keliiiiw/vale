@@ -1,30 +1,36 @@
 import streamlit as st
-import time
 import random
 
 st.set_page_config(page_title="Happy Valentine", page_icon="💖", layout="centered")
 
-# --- SESSION STATE ---
-if "show_message" not in st.session_state:
-    st.session_state.show_message = False
+# Session state
+if "open_letter" not in st.session_state:
+    st.session_state.open_letter = False
 
-# --- CUSTOM CSS ---
+# --- CSS STYLE ---
 st.markdown("""
 <style>
+
+/* Disable scroll */
+html, body, [class*="css"]  {
+    overflow: hidden !important;
+}
+
+/* Background */
 .stApp {
     background: linear-gradient(to bottom right, #ffc0cb, #ff69b4);
     color: white;
     text-align: center;
     font-family: 'Georgia', serif;
-    overflow: hidden;
 }
 
-/* Falling hearts animation */
+/* Falling hearts */
 .heart {
     position: fixed;
     top: -10px;
-    font-size: 20px;
+    font-size: 22px;
     animation: fall linear infinite;
+    z-index: 0;
 }
 
 @keyframes fall {
@@ -33,40 +39,32 @@ st.markdown("""
     }
 }
 
-/* Main Title */
+/* Title */
 .title {
     font-size: 55px;
     font-weight: bold;
-    margin-top: 100px;
+    margin-top: 120px;
     animation: fadeIn 2s ease-in-out;
+    position: relative;
+    z-index: 2;
 }
 
 /* Fade animation */
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
+    from {opacity: 0; transform: translateY(30px);}
     to {opacity: 1; transform: translateY(0);}
-}
-
-/* Message Box */
-.message-box {
-    background-color: rgba(255,255,255,0.25);
-    padding: 30px;
-    border-radius: 25px;
-    font-size: 22px;
-    margin-top: 30px;
-    animation: fadeIn 2s ease-in-out;
-    backdrop-filter: blur(10px);
 }
 
 /* Elegant Button */
 div.stButton > button {
     background-color: white;
     color: #ff1493;
-    border-radius: 30px;
+    border-radius: 40px;
     font-size: 20px;
-    padding: 12px 40px;
+    padding: 12px 45px;
     border: none;
     transition: 0.4s;
+    z-index: 2;
 }
 
 div.stButton > button:hover {
@@ -74,13 +72,42 @@ div.stButton > button:hover {
     color: white;
     transform: scale(1.1);
 }
+
+/* Letter container */
+.letter {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    background: #fff0f5;
+    color: #c71585;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    font-size: 20px;
+    transition: bottom 1.5s ease-in-out;
+    z-index: 5;
+}
+
+/* Show letter */
+.letter.show {
+    bottom: 20%;
+}
+
+/* Love decoration inside letter */
+.letter h2 {
+    margin-bottom: 20px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-# --- Generate Falling Hearts ---
-for i in range(20):
+# Generate falling hearts
+for i in range(25):
     left = random.randint(0, 100)
-    duration = random.uniform(5, 10)
+    duration = random.uniform(6, 12)
     delay = random.uniform(0, 5)
     st.markdown(
         f"""
@@ -94,23 +121,25 @@ for i in range(20):
         unsafe_allow_html=True
     )
 
-# --- Main Content ---
+# Main title
 st.markdown('<div class="title">💖 HAPPY VALENTINE MOWY 💖</div>', unsafe_allow_html=True)
 
 st.write("")
+st.write("")
 
-if not st.session_state.show_message:
+# Button
+if not st.session_state.open_letter:
     if st.button("NEXT 💌"):
-        st.session_state.show_message = True
-        st.balloons()  # confetti effect
-        time.sleep(0.5)
+        st.session_state.open_letter = True
 
-if st.session_state.show_message:
+# Letter animation
+if st.session_state.open_letter:
     st.markdown("""
-    <div class="message-box">
-    Happy Valentine cantik 💕<br><br>
-    maaf kalo ini simple banget,<br>
-    tapi intinya aku sayang banget sama kamu,<br><br>
-    <b>i love u Chelsea Morenofa 💖</b>
+    <div class="letter show">
+        <h2>💌 For My Love 💌</h2>
+        Happy Valentine cantik 💕<br><br>
+        maaf kalo ini simple banget,<br>
+        tapi intinya aku sayang banget sama kamu,<br><br>
+        <b>i love u Chelsea Morenofa 💖</b>
     </div>
     """, unsafe_allow_html=True)
