@@ -139,7 +139,11 @@ if st.session_state.open_letter:
         <h2>💌 For My Love 💌</h2>
         Happy Valentine cantik 💕<br><br>
         maaf kalo ini simple banget,<br>
-        tapi intinya aku sayang banget sama kamu,<br><br>
+        tapi intinya aku sayang banget sama kamu, maaf ya kalo aku
+        masih belom bisa tepatin janji aku, aku beneran kangen terus
+        sama kamu, cewe imut yang paling lucu, yang selalu buat aku
+        kangen, jujur aku mau banget ngasih bunga tapi ngga tau
+        gimana caranya :( intinya<br><br>
         <b>i love u Chelsea Morenofa 💖</b>
     </div>
     """, unsafe_allow_html=True)
