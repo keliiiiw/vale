@@ -3,16 +3,14 @@ import random
 
 st.set_page_config(page_title="Happy Valentine", page_icon="💖", layout="centered")
 
-# Session state
 if "open_letter" not in st.session_state:
     st.session_state.open_letter = False
 
-# --- CSS STYLE ---
 st.markdown("""
 <style>
 
 /* Disable scroll */
-html, body, [class*="css"]  {
+html, body {
     overflow: hidden !important;
 }
 
@@ -28,43 +26,40 @@ html, body, [class*="css"]  {
 .heart {
     position: fixed;
     top: -10px;
-    font-size: 22px;
+    font-size: 20px;
     animation: fall linear infinite;
     z-index: 0;
 }
 
 @keyframes fall {
-    to {
-        transform: translateY(110vh);
-    }
+    to { transform: translateY(110vh); }
 }
 
 /* Title */
 .title {
-    font-size: 55px;
+    font-size: 42px;
     font-weight: bold;
-    margin-top: 120px;
+    margin-top: 80px;
     animation: fadeIn 2s ease-in-out;
     position: relative;
     z-index: 2;
+    padding: 0 15px;
 }
 
-/* Fade animation */
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(30px);}
+    from {opacity: 0; transform: translateY(20px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* Elegant Button */
+/* Button */
 div.stButton > button {
     background-color: white;
     color: #ff1493;
     border-radius: 40px;
-    font-size: 20px;
-    padding: 12px 45px;
+    font-size: 18px;
+    padding: 10px 35px;
     border: none;
     transition: 0.4s;
-    z-index: 2;
 }
 
 div.stButton > button:hover {
@@ -73,39 +68,50 @@ div.stButton > button:hover {
     transform: scale(1.1);
 }
 
-/* Letter container */
+/* Letter */
 .letter {
     position: fixed;
     bottom: -100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
+    width: 85%;
+    max-width: 400px;
     background: #fff0f5;
     color: #c71585;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     transition: bottom 1.5s ease-in-out;
     z-index: 5;
 }
 
-/* Show letter */
 .letter.show {
-    bottom: 20%;
+    bottom: 15%;
 }
 
-/* Love decoration inside letter */
 .letter h2 {
-    margin-bottom: 20px;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Responsive for very small phones */
+@media (max-width: 400px) {
+    .title {
+        font-size: 32px;
+    }
+    .letter {
+        font-size: 14px;
+        padding: 20px;
+    }
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# Generate falling hearts
-for i in range(25):
+# Falling hearts
+for i in range(20):
     left = random.randint(0, 100)
     duration = random.uniform(6, 12)
     delay = random.uniform(0, 5)
@@ -121,29 +127,26 @@ for i in range(25):
         unsafe_allow_html=True
     )
 
-# Main title
 st.markdown('<div class="title">💖 HAPPY VALENTINE MOWY 💖</div>', unsafe_allow_html=True)
 
 st.write("")
 st.write("")
 
-# Button
 if not st.session_state.open_letter:
     if st.button("NEXT 💌"):
         st.session_state.open_letter = True
 
-# Letter animation
 if st.session_state.open_letter:
     st.markdown("""
     <div class="letter show">
         <h2>💌 For My Love 💌</h2>
         Happy Valentine cantik 💕<br><br>
         maaf kalo ini simple banget,<br>
-        tapi intinya aku sayang banget sama kamu, maaf ya kalo aku
-        masih belom bisa tepatin janji aku, aku beneran kangen terus
-        sama kamu, cewe imut yang paling lucu, yang selalu buat aku
-        kangen, jujur aku mau banget ngasih bunga tapi ngga tau
-        gimana caranya :( intinya<br><br>
+        tapi intinya aku sayang banget sama kamu,
+        maaf kalo aku masih ngga bisa nepatin janji aku
+        karena emang kamu selalu ngangenin, tingkah kamu,
+        suara kamu, bener bener imut banget pls, aku pengen
+        banget ngasih kamu bunga jujur, hufftt intinya<br><br>
         <b>i love u Chelsea Morenofa 💖</b>
     </div>
     """, unsafe_allow_html=True)
